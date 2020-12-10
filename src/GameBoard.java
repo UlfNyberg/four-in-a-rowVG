@@ -203,6 +203,9 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         else {
             p2Score++;
             gameGUI.p2ScoreCounter.setText(String.valueOf(p2Score));
+            if (p2Score >= 5){
+                JOptionPane.showMessageDialog(gameGUI, "Spelare 2, du vann!");
+            }
         }
     }
 
