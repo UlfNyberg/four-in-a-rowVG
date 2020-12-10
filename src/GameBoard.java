@@ -1,4 +1,4 @@
-import Tile.Tile;
+import Tile.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,7 +48,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     }
 
     private void initiateTileList() {
-        tileList = new ArrayList<java.util.List<Tile>>();
+        tileList = new ArrayList<List<Tile>>();
 
         for (int i = 0; i < ROWS; i++) {
             tileList.add(new ArrayList<>());
@@ -96,7 +96,6 @@ public class GameBoard extends MouseAdapter implements ActionListener {
             gameGUI.p1ScoreLabel.setFont(gameGUI.font1);
             gameGUI.p2ScoreLabel.setFont(gameGUI.font2);
         }
-
     }
 
     @Override
@@ -125,148 +124,14 @@ public class GameBoard extends MouseAdapter implements ActionListener {
 
     public void calculateVictory(int currentPlayer) {
 
-        if (calculateHorizontal(currentPlayer) || calculateVertical(currentPlayer)
-                || calculateDiagonalSE(currentPlayer) || calculateDiagonalSW(currentPlayer)) {
+        if (CalculateVictory.getInstance().calculateVictory(currentPlayer, tileList)) {
             showMessageDialog(gameGUI, "Spelare " + currentPlayer + " vann!");
             playAgain();
             winnerPoint(currentPlayer);
-        }else if(calculateDraw()){
+        }else if(CalculateVictory.getInstance().calculateDraw(tileList)){
             showMessageDialog(gameGUI, "Ingen spelare vann...");
             playAgain();
         }
-    }
-
-    private boolean calculateDraw() {
-
-        for (int x = 0; x < COLUMNS; x++) {
-            for (int y = 0; y < ROWS; y++) {
-                if (tileList.get(y).get(x) instanceof EmptyTile) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private boolean calculateHorizontal(int player) {
-        int consecutiveTiles;
-        for (int x = 0; x < COLUMNS - 3; x++) {
-            for (int y = 0; y < ROWS; y++) {
-                consecutiveTiles = 0;
-                if (tileList.get(y).get(x) instanceof PlayerTile && ((PlayerTile) tileList.get(y).get(x)).getPlayer() == player) {
-                    consecutiveTiles++;
-                    for (int i = 1; i < 4; i++) {
-                        if (tileList.get(y).get(x + i) instanceof PlayerTile) {
-                            if (((PlayerTile) tileList.get(y).get(x + i)).getPlayer() == player) {
-                                consecutiveTiles++;
-                            } else {
-                                consecutiveTiles = 0;
-                                break;
-                            }
-                        } else {
-                            consecutiveTiles = 0;
-                            break;
-                        }
-                    }
-                    if (consecutiveTiles == 4) {
-                        //win
-                        System.out.println(player + " vann horisontellt!");
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean calculateVertical(int player) {
-        int consecutiveTiles;
-        for (int x = 0; x < COLUMNS; x++) {
-            for (int y = 0; y < ROWS - 3; y++) {
-                consecutiveTiles = 0;
-                if (tileList.get(y).get(x) instanceof PlayerTile && ((PlayerTile) tileList.get(y).get(x)).getPlayer() == player) {
-
-                    consecutiveTiles++;
-                    for (int i = 1; i < 4; i++) {
-                        if (tileList.get(y + i).get(x) instanceof PlayerTile) {
-                            if (((PlayerTile) tileList.get(y + i).get(x)).getPlayer() == player) {
-                                consecutiveTiles++;
-                            } else {
-                                break;
-                            }
-                        } else {
-                            break;
-                        }
-                    }
-                    if (consecutiveTiles == 4) {
-                        //win
-                        System.out.println(player + " vann vertikalt!");
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean calculateDiagonalSE(int player) {
-        int consecutiveTiles;
-        for (int x = 0; x < COLUMNS - 3; x++) {
-            for (int y = 0; y < ROWS - 3; y++) {
-                consecutiveTiles = 0;
-                if (tileList.get(y).get(x) instanceof PlayerTile && ((PlayerTile) tileList.get(y).get(x)).getPlayer() == player) {
-
-                    consecutiveTiles++;
-                    for (int i = 1; i < 4; i++) {
-                        if (tileList.get(y + i).get(x + i) instanceof PlayerTile) {
-                            if (((PlayerTile) tileList.get(y + i).get(x + i)).getPlayer() == player) {
-                                consecutiveTiles++;
-                            } else {
-                                break;
-                            }
-                        } else {
-                            break;
-                        }
-                    }
-                    if (consecutiveTiles == 4) {
-                        //win
-                        System.out.println(player + " vann SE!");
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean calculateDiagonalSW(int player) {
-        int consecutiveTiles;
-        for (int x = 3; x < COLUMNS; x++) {
-            for (int y = 0; y < ROWS - 3; y++) {
-                consecutiveTiles = 0;
-                if (tileList.get(y).get(x) instanceof PlayerTile && ((PlayerTile) tileList.get(y).get(x)).getPlayer() == player) {
-
-                    consecutiveTiles++;
-                    for (int i = 1; i < 4; i++) {
-                        if (tileList.get(y + i).get(x - i) instanceof PlayerTile) {
-                            if (((PlayerTile) tileList.get(y + i).get(x - i)).getPlayer() == player) {
-                                consecutiveTiles++;
-                            } else {
-                                break;
-                            }
-                        } else {
-                            break;
-                        }
-                    }
-                    if (consecutiveTiles == 4) {
-                        //win
-                        System.out.println(player + " vann SW!");
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     public void gameRules(){
@@ -284,6 +149,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
             SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, 3, Color.BLACK));
         }
         else {
+
             System.exit(1);
         }
     }
@@ -330,6 +196,9 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         if (player == 1) {
             p1Score++;
             gameGUI.p1ScoreCounter.setText(String.valueOf(p1Score));
+            if (p1Score >= 5) {
+                JOptionPane.showMessageDialog(gameGUI, "Spelare 1, du vann!");
+            }
         }
         else {
             p2Score++;
@@ -338,6 +207,13 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     }
 
     public static void main(String[] args) {
-        GameBoard gb = new GameBoard();
+       // GameBoard gb = new GameBoard();
+        JDialog f = new JDialog();
+        //f.setUndecorated(true);
+        ImageIcon icon = new ImageIcon("src/Banners/TravelBanner1.jpg");
+        JLabel label = new JLabel(icon);
+        f.add(label);
+        f.setSize(600, 600);
+        f.setVisible(true);
     }
 }

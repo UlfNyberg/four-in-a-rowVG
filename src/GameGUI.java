@@ -1,4 +1,4 @@
-import Tile.Tile;
+import Tile.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,7 +47,7 @@ public class GameGUI extends JFrame {
 
     private Color gridColor = new Color(137,207,240);
 
-    public GameGUI(java.util.List<java.util.List<Tile>> tileList, ActionListener al){
+    public GameGUI(List<List<Tile>> tileList, ActionListener al){
 
         setLayout(new BorderLayout());
         southPanel.setLayout(new BorderLayout());
@@ -123,11 +123,11 @@ public class GameGUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    private void initiateGameGrid(java.util.List<java.util.List<Tile>> tileList) {
+    private void initiateGameGrid(List<List<Tile>> tileList) {
         refreshGameGrid(tileList, 2, Color.black);
     }
 
-    public void refreshGameGrid (java.util.List<java.util.List<Tile>> tileList, int player, Color color){
+    public void refreshGameGrid (List<List<Tile>> tileList, int player, Color color){
         gridPanel.removeAll();
         for (List<Tile> tileColumn : tileList) {
             for (Tile tile : tileColumn) {
