@@ -176,17 +176,4 @@ public class CalculateVictory {
         return false;
     }
 
-    /*
-    Month christmas = Month.DECEMBER;
-    Month summer = Month.JULY;
-    LocalDate currentTime = LocalDateTime.now(ZoneId.of("Europe/Paris"));
-
-    if (currentTime.getMonth() == christmas)
-    Banner 3
-    else if (currentTime.getMonth() == summer)
-    Banner 1
-    else
-    Banner 2
-
-     */
 }
