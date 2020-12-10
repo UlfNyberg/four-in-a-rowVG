@@ -149,7 +149,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
             SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, 3, Color.BLACK));
         }
         else {
-
+            gameGUI.bannerShow();
             System.exit(1);
         }
     }
@@ -210,13 +210,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     }
 
     public static void main(String[] args) {
-       // GameBoard gb = new GameBoard();
-        JDialog f = new JDialog();
-        //f.setUndecorated(true);
-        ImageIcon icon = new ImageIcon("src/Banners/TravelBanner1.jpg");
-        JLabel label = new JLabel(icon);
-        f.add(label);
-        f.setSize(600, 600);
-        f.setVisible(true);
+       GameBoard gb = new GameBoard();
+
     }
 }

@@ -3,6 +3,10 @@ import Tile.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneId;
 import java.util.List;
 
 /**
@@ -142,5 +146,25 @@ public class GameGUI extends JFrame {
         gridPanel.revalidate();
         gridPanel.repaint();
     }
-
+    public void bannerShow (){
+        this.setVisible(false);
+        JDialog dialog = new JDialog();
+        ImageIcon icon = new ImageIcon("src/Banners/TravelBanner01.jpg");
+        ImageIcon icon2 = new ImageIcon("src/Banners/TravelBanner02.jpg");
+        ImageIcon icon3 = new ImageIcon("src/Banners/TravelBanner03.jpg");
+        Month christmas = Month.DECEMBER;
+        Month summer = Month.JULY;
+        LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Europe/Paris"));
+        JLabel label;
+        if (currentTime.getMonth() == christmas)
+        label = new JLabel(icon3);
+        else if (currentTime.getMonth() == summer)
+        label = new JLabel(icon);
+        else
+        label = new JLabel(icon2);
+        dialog.add(label);
+        dialog.setSize(600, 600);
+        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        dialog.setVisible(true);
+    }
 }
