@@ -32,8 +32,8 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     public int p1Score = 0;
     public int p2Score = 0;
 
-    public java.util.List<java.util.List<Tile>> tileList;
-    private java.util.List<java.util.List<Tile>> undoList;
+    public List<List<Tile>> tileList;
+    private List<List<Tile>> undoList;
 
     private TileFactory tileFactory;
 
