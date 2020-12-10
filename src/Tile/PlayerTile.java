@@ -1,3 +1,6 @@
+package Tile;
+
+
 import java.awt.*;
 
 /**
@@ -7,7 +10,7 @@ import java.awt.*;
  * Project: four-in-a-rowVG
  * Copyright: MIT
  */
-public class PlayerTile extends Tile{
+public class PlayerTile extends Tile {
 
     private int player;
     private Color color;
