@@ -197,7 +197,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
             p1Score++;
             gameGUI.p1ScoreCounter.setText(String.valueOf(p1Score));
             if (p1Score >= 5) {
-                JOptionPane.showMessageDialog(gameGUI, "Spelare 1, du vann!");
+                JOptionPane.showMessageDialog(gameGUI, "Spelare 1, du vann spelet!");
                 gameGUI.bannerShow();
                 System.exit(1);
             }
@@ -206,7 +206,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
             p2Score++;
             gameGUI.p2ScoreCounter.setText(String.valueOf(p2Score));
             if (p2Score >= 5){
-                JOptionPane.showMessageDialog(gameGUI, "Spelare 2, du vann!");
+                JOptionPane.showMessageDialog(gameGUI, "Spelare 2, du vann spelet!");
                 gameGUI.bannerShow();
                 System.exit(1);
             }
