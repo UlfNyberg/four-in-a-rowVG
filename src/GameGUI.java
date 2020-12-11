@@ -164,6 +164,7 @@ public class GameGUI extends JFrame {
         label = new JLabel(icon2);
         dialog.add(label);
         dialog.setSize(600, 600);
+        dialog.setLocation(this.getLocation());
         dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setVisible(true);
     }
