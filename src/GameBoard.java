@@ -125,9 +125,9 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     public void calculateVictory(int currentPlayer) {
 
         if (CalculateVictory.getInstance().calculateVictory(currentPlayer, tileList)) {
-            showMessageDialog(gameGUI, "Spelare " + currentPlayer + " vann!");
-            playAgain();
             winnerPoint(currentPlayer);
+            showMessageDialog(gameGUI, "Spelare " + currentPlayer + " vann omgången!");
+            playAgain();
         }else if(CalculateVictory.getInstance().calculateDraw(tileList)){
             showMessageDialog(gameGUI, "Ingen spelare vann...");
             playAgain();
